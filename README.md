@@ -1,5 +1,8 @@
 ### Hi there 👋
 
+![Altaga github stats](https://github-readme-stats.vercel.app/api?username=altaga&show_icons=true&theme=radical)
+![Altaga github stats](https://github-readme-stats.vercel.app/api/top-langs/?username=altaga&show_icons=true&theme=radical&layout=compact)
+
 <!--
 **altaga/altaga** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
