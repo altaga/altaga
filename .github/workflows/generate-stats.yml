@@ -1,12 +1,9 @@
 name: Generate GitHub Stats
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 on:
   schedule:
-    - cron: '0 0 * * *'
-  workflow_dispatch:
+    - cron: '0 0 * * *' # Runs daily at midnight
+  workflow_dispatch:    # Allows manual triggering
 
 permissions:
   contents: write
@@ -15,17 +12,30 @@ jobs:
   generate-stats:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Create stats directory
         run: mkdir -p stats
 
-      - name: Generate stats using anuraghazra's action
-        uses: anuraghazra/github-readme-stats@master
+      - name: Generate GitHub Stats Card
+        uses: readme-tools/github-readme-stats-action@v1
         with:
-          username: altaga
-            output_path*
+          card: stats
+          options: username=altaga&show_icons=true&theme=radical
+          path: stats/github-stats.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate Top Languages Card
+        uses: readme-tools/github-readme-stats-action@v1
+        with:
+          card: top-langs
+          options: username=altaga&layout=compact&theme=radical
+          path: stats/top-langs.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: update github stats'
+          file_pattern: 'stats/*.svg'
