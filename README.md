@@ -28,10 +28,6 @@ Architecting scalable solutions across IoT, Edge AI, Cloud, and Web3.
   <img src="./stats/top-langs.svg" height="190" alt="Top Languages" />
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/YC%20(Advisor%20Track)%20&%20MIT%20Alum-EAEAEA?style=flat" alt="YC & MIT Alum" height="20" />
-</p>
-
 ---
 
 ### 📫 Connect with me
