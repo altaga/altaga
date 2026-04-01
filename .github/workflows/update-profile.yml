@@ -1,0 +1,60 @@
+name: Update Profile Stats and Metrics
+
+on:
+    schedule:
+        - cron: "0 0 * * *" # Daily at midnight
+    workflow_dispatch:
+
+permissions:
+    contents: write
+
+jobs:
+    update-profile:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6
+
+            - name: Create stats directory
+              run: mkdir -p stats
+
+            # STEP 1: Generate GitHub Stats
+            - name: Generate GitHub Stats Card
+              uses: readme-tools/github-readme-stats-action@v1
+              with:
+                  card: stats
+                  options: username=altaga&show_icons=true&theme=radical
+                  path: stats/github-stats.svg
+                  token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Generate Top Languages Card
+              uses: readme-tools/github-readme-stats-action@v1
+              with:
+                  card: top-langs
+                  options: username=altaga&layout=compact&theme=radical
+                  path: stats/top-langs.svg
+                  token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Commit stats changes
+              uses: stefanzweifel/git-auto-commit-action@v7
+              with:
+                  commit_message: "chore: update github stats"
+                  file_pattern: "stats/*.svg"
+
+            # STEP 2: Generate Metrics (after stats are committed)
+            - name: Generate metrics
+              uses: lowlighter/metrics@latest
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  user: altaga
+                  template: classic
+                  base: header, activity, community, repositories, metadata
+                  config_timezone: America/New_York
+                  output_action: commit
+                  commit_message: "docs: update metrics"
+
+            # STEP 3: Final sync
+            - name: Final pull and push
+              run: |
+                  git pull origin master || true
+                  git push origin master || true
