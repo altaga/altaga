@@ -1,13 +1,43 @@
 # 👋 Víctor Altamirano | CTO & Solution Architect
+
 Architecting scalable solutions across IoT, Edge AI, Cloud, and Web3.
 
-**Tech:** Rust • Python • JS/TS • C • AWS • Azure • GCP • Docker • EVMs • Solana • Hedera • Starknet • Aptos • Jetson • ESP32 • Next.js • React Native • FastAPI
+---
+
+### 🛠️ Core Tech Stack
 
 <p align="center">
-  <img src="./stats/github-stats.svg" height="170" />
-  <img src="./stats/top-langs.svg" height="170" />
+  <img src="https://img.shields.io/badge/Rust-000000?style=flat&logo=rust&logoColor=white" alt="Rust" height="24" />
+  <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python" height="24" />
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black" alt="JavaScript" height="24" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white" alt="TypeScript" height="24" />
+  <img src="https://img.shields.io/badge/C-A8B9CC?style=flat&logo=c&logoColor=white" alt="C" height="24" />
+  <img src="https://img.shields.io/badge/AWS-232F3E?style=flat&logo=amazon-aws&logoColor=white" alt="AWS" height="24" />
+  <img src="https://img.shields.io/badge/Azure-0089D6?style=flat&logo=microsoft-azure&logoColor=white" alt="Azure" height="24" />
+  <img src="https://img.shields.io/badge/GCP-4285F4?style=flat&logo=google-cloud&logoColor=white" alt="GCP" height="24" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white" alt="Docker" height="24" />
+  <img src="https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux&logoColor=black" alt="Linux" height="24" />
+</p>
+
+---
+
+### 📊 Stats & Open Source
+
+<p align="center">
+  <img src="./stats/github-stats.svg" height="190" alt="GitHub stats" />
+  <img src="./stats/top-langs.svg" height="190" alt="Top Languages" />
 </p>
 
 <p align="center">
-  <a href="https://altaga-hacker.com/">🌐 Website</a> | <a href="https://www.linkedin.com/in/victor-alonso-altamirano-izquierdo-311437137/">💼 LinkedIn</a> | <a href="mailto:altaga@protonmail.com">✉️ Email</a>
+  <img src="https://img.shields.io/badge/YC%20(Advisor%20Track)%20&%20MIT%20Alum-EAEAEA?style=flat" alt="YC & MIT Alum" height="20" />
+</p>
+
+---
+
+### 📫 Connect with me
+
+<p align="center">
+  <a href="https://altaga-hacker.com/"><img src="https://img.shields.io/badge/Website-000000?style=flat&logo=globe&logoColor=white" alt="Website" height="24" /></a>
+  <a href="https://www.linkedin.com/in/victor-alonso-altamirano-izquierdo-311437137/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white" alt="LinkedIn" height="24" /></a>
+  <a href="mailto:altaga@protonmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=flat&logo=gmail&logoColor=white" alt="Email" height="24" /></a>
 </p>
