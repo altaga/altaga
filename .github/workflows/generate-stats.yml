@@ -15,7 +15,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          node-version: '24'
+          fetch-depth: 0  # Fetch full history
 
       - name: Create stats directory
         run: mkdir -p stats
@@ -35,10 +35,13 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Actions Bot"
 
+      - name: Pull latest changes
+        run: git pull --rebase origin master
+
       - name: Commit and push changes
         run: |
           git add stats/
           git commit -m "📊 Update GitHub stats" || echo "No changes to commit"
-          git push
+          git push origin master
         env:
           FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
