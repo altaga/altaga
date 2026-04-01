@@ -1,4 +1,4 @@
 ### Webpage https://altaga-hacker.com/
 
-![Altaga github stats](./stats/github-stats.svg)
-![Altaga top Langs](./stats/top-langs.svg)
+<img src="./stats/github-stats.svg" height="195" alt="Altaga github stats" />
+<img src="./stats/top-langs.svg" height="195" alt="Altaga top Langs" />
