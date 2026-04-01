@@ -4,7 +4,7 @@ Architecting scalable solutions across IoT, Edge AI, Cloud, and Web3.
 
 ### 🛠️ Core Tech Stack
 
-<p align="center">
+<p align="left">
   <img src="https://img.shields.io/badge/C-A8B9CC?style=flat&logo=c&logoColor=white" alt="C" height="24" />
   <img src="https://img.shields.io/badge/Rust-000000?style=flat&logo=rust&logoColor=white" alt="Rust" height="24" />
   <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python" height="24" />
@@ -19,7 +19,7 @@ Architecting scalable solutions across IoT, Edge AI, Cloud, and Web3.
 
 ### ⛓️ Web3 & Blockchains
 
-<p align="center">
+<p align="left">
   <img src="https://img.shields.io/badge/Ethereum_EVMs-3C3C3D?style=flat&logo=ethereum&logoColor=white" alt="EVMs" height="24" />
   <img src="https://img.shields.io/badge/Solana-14F195?style=flat&logo=solana&logoColor=black" alt="Solana" height="24" />
   <img src="https://img.shields.io/badge/Hedera-222222?style=flat&logo=hedera&logoColor=white" alt="Hedera" height="24" />
@@ -39,7 +39,7 @@ Architecting scalable solutions across IoT, Edge AI, Cloud, and Web3.
 
 ### 📫 Connect with me
 
-<p align="center">
+<p align="left">
   <a href="https://altaga-hacker.com/"><img src="https://img.shields.io/badge/Website-000000?style=flat&logo=globe&logoColor=white" alt="Website" height="24" /></a>
   <a href="https://www.linkedin.com/in/victor-alonso-altamirano-izquierdo-311437137/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white" alt="LinkedIn" height="24" /></a>
   <a href="mailto:altaga@protonmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=flat&logo=gmail&logoColor=white" alt="Email" height="24" /></a>
