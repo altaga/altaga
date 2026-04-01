@@ -1,0 +1,40 @@
+name: Generate GitHub Stats
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Daily at midnight UTC
+  workflow_dispatch:  # Manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  generate-stats:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create stats directory
+        run: mkdir -p stats
+
+      - name: Generate GitHub Stats SVG
+        run: |
+          curl -L "https://github-readme-stats.vercel.app/api?username=altaga&theme=default&layout=compact&show_icons=true" \
+            -o stats/github-stats.svg
+
+      - name: Generate Top Languages SVG
+        run: |
+          curl -L "https://github-readme-stats.vercel.app/api/top-langs/?username=altaga&theme=default&layout=compact" \
+            -o stats/top-languages.svg
+
+      - name: Configure git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Actions Bot"
+
+      - name: Commit and push changes
+        run: |
+          git add stats/
+          git commit -m "📊 Update GitHub stats" || echo "No changes to commit"
+          git push
