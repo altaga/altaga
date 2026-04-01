@@ -2,8 +2,8 @@ name: Generate GitHub Stats
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Daily at midnight UTC
-  workflow_dispatch:  # Manual trigger
+    - cron: "0 0 * * *" # Daily at midnight UTC
+  workflow_dispatch: # Manual trigger
 
 permissions:
   contents: write
@@ -15,7 +15,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Fetch full history
+          fetch-depth: 0 # Fetch full history
 
       - name: Create stats directory
         run: mkdir -p stats
@@ -35,13 +35,17 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Actions Bot"
 
-      - name: Pull latest changes
-        run: git pull --rebase origin master
-
-      - name: Commit and push changes
+      - name: Commit changes locally
         run: |
           git add stats/
           git commit -m "📊 Update GitHub stats" || echo "No changes to commit"
+
+      - name: Pull and rebase
+        run: |
+          git pull --rebase origin master || git rebase --abort
+
+      - name: Push changes
+        run: |
           git push origin master
         env:
           FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
