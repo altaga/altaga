@@ -28,22 +28,4 @@ jobs:
         uses: anuraghazra/github-readme-stats@master
         with:
           username: altaga
-          output_path: stats
-          theme: default
-          layout: compact
-          show_icons: true
-
-      - name: Configure git
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-
-      - name: Commit changes
-        run: |
-          git add stats/
-          git diff --cached --quiet || git commit -m "📊 Update stats"
-
-      - name: Push changes
-        run: |
-          git pull --no-edit origin master || true
-          git push origin master
+            output_path*
