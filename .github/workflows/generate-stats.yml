@@ -22,7 +22,7 @@ jobs:
         uses: readme-tools/github-readme-stats-action@v1
         with:
           card: stats
-          options: username=altaga&show_icons=true&theme=radical
+          options: username=altaga&show_icons=true&theme=default
           path: stats/github-stats.svg
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -30,7 +30,7 @@ jobs:
         uses: readme-tools/github-readme-stats-action@v1
         with:
           card: top-langs
-          options: username=altaga&layout=compact&theme=radical
+          options: username=altaga&layout=compact&theme=default
           path: stats/top-langs.svg
           token: ${{ secrets.GITHUB_TOKEN }}
 
