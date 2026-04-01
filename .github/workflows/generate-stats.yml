@@ -18,35 +18,49 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
       - name: Create stats directory
         run: mkdir -p stats
 
-      - name: Generate GitHub Stats SVG
+      - name: Generate stats using jstrieb/github-stats
         run: |
-          curl -L "https://github-readme-stats.vercel.app/api?username=altaga&theme=default&layout=compact&show_icons=true" \
-            -o stats/github-stats.svg
-
-      - name: Generate Top Languages SVG
-        run: |
-          curl -L "https://github-readme-stats.vercel.app/api/top-langs/?username=altaga&theme=default&layout=compact" \
-            -o stats/top-languages.svg
+          npm install -g github-readme-stats-cli
+          
+          # Generate GitHub stats
+          github-readme-stats \
+            --username altaga \
+            --theme default \
+            --layout compact \
+            --show-icons \
+            > stats/github-stats.svg
+          
+          # Generate top languages
+          github-readme-stats \
+            --username altaga \
+            --theme default \
+            --layout compact \
+            --type languages \
+            > stats/top-languages.svg
 
       - name: Configure git
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Actions Bot"
 
-      - name: Check for changes and commit
+      - name: Commit changes
         run: |
           if [ -n "$(git status --porcelain)" ]; then
             git add stats/
             git commit -m "📊 Update GitHub stats"
           else
-            echo "No changes to commit"
+            echo "ℹ️ No changes to commit"
           fi
 
-      - name: Pull latest changes
-        run: git pull --no-edit origin master
-
-      - name: Push changes
-        run: git push origin master
+      - name: Pull and push
+        run: |
+          git pull --no-edit origin master
+          git push origin master
