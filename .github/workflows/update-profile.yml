@@ -50,8 +50,9 @@ jobs:
                   template: classic
                   base: header, activity, community, repositories, metadata
                   config_timezone: America/New_York
+                  committer_message: "docs: update metrics"
+                  committer_branch: master
                   output_action: commit
-                  commit_message: "docs: update metrics"
 
             # STEP 3: Final sync
             - name: Final pull and push
