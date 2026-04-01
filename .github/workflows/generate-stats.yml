@@ -41,7 +41,12 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then
             git add stats/
             git commit -m "📊 Update GitHub stats"
-            git push
           else
             echo "No changes to commit"
           fi
+
+      - name: Pull latest changes
+        run: git pull --no-edit origin master
+
+      - name: Push changes
+        run: git push origin master
