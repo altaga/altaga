@@ -18,33 +18,52 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
       - name: Create stats directory
         run: mkdir -p stats
 
-      - name: Generate stats using jstrieb/github-stats
+      - name: Download GitHub Stats (with retry)
         run: |
-          npm install -g github-readme-stats-cli
-          
-          # Generate GitHub stats
-          github-readme-stats \
-            --username altaga \
-            --theme default \
-            --layout compact \
-            --show-icons \
-            > stats/github-stats.svg
-          
-          # Generate top languages
-          github-readme-stats \
-            --username altaga \
-            --theme default \
-            --layout compact \
-            --type languages \
-            > stats/top-languages.svg
+          for i in {1..5}; do
+            echo "Attempt $i..."
+            curl -s -L \
+              "https://github-readme-stats.vercel.app/api?username=altaga&theme=default&layout=compact&show_icons=true&cache_seconds=3600" \
+              -o stats/github-stats.svg
+            
+            if grep -q "<svg" stats/github-stats.svg 2>/dev/null; then
+              echo "✅ GitHub stats downloaded successfully"
+              break
+            else
+              echo "⚠️ Attempt $i failed, retrying..."
+              sleep $((i * 5))
+            fi
+          done
+
+      - name: Download Top Languages (with retry)
+        run: |
+          for i in {1..5}; do
+            echo "Attempt $i..."
+            curl -s -L \
+              "https://github-readme-stats.vercel.app/api/top-langs/?username=altaga&theme=default&layout=compact&cache_seconds=3600" \
+              -o stats/top-languages.svg
+            
+            if grep -q "<svg" stats/top-languages.svg 2>/dev/null; then
+              echo "✅ Top languages downloaded successfully"
+              break
+            else
+              echo "⚠️ Attempt $i failed, retrying..."
+              sleep $((i * 5))
+            fi
+          done
+
+      - name: Verify files were created
+        run: |
+          if [ -f stats/github-stats.svg ] && [ -f stats/top-languages.svg ]; then
+            echo "✅ Both SVG files created"
+            ls -lh stats/
+          else
+            echo "❌ Files not created"
+            exit 1
+          fi
 
       - name: Configure git
         run: |
@@ -56,11 +75,12 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then
             git add stats/
             git commit -m "📊 Update GitHub stats"
+            echo "✅ Changes committed"
           else
             echo "ℹ️ No changes to commit"
           fi
 
       - name: Pull and push
         run: |
-          git pull --no-edit origin master
-          git push origin master
+          git pull --no-edit origin master || true
+          git push origin master || echo "Nothing to push"
