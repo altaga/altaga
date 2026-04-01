@@ -6,10 +6,10 @@ Translating complex business needs into scalable, end-to-end architectures—fro
 ---
 
 ### 🛠️ Tech Stack
-- **Core:** Rust • Python • JS/TS • C • Go
+- **Core:** Rust • Python • JS/TS • C
 - **Cloud & Web3:** AWS • Docker • Linux • Solana • Hedera
 - **Hardware & IoT:** ESP32 • Embedded Systems • Edge AI
-- **Frameworks:** React (Native) • Node.js • FastAPI • Django
+- **Frameworks:** React (Native) • Node.js • FastAPI
 
 ---
 
