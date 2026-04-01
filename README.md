@@ -7,9 +7,10 @@ Translating complex business needs into scalable, end-to-end architectures—fro
 
 ### 🛠️ Tech Stack
 - **Core:** Rust • Python • JS/TS • C
-- **Cloud & Web3:** AWS • Docker • Linux • Solana • Hedera
-- **Hardware & IoT:** ESP32 • Embedded Systems • Edge AI
-- **Frameworks:** React (Native) • Node.js • FastAPI
+- **Cloud & DevOps:** AWS • Azure • GCP • Docker • Linux
+- **Web3 & Blockchain:** EVMs (Base, Monad, Avax) • Solana • Hedera • Starknet • Aptos
+- **Hardware & Edge AI:** NVIDIA Jetson • Raspberry Pi • ESP32 • Arduino
+- **Frameworks:** Next.js • React Native (Expo) • FastAPI • Django • Node.js
 
 ---
 
@@ -17,10 +18,6 @@ Translating complex business needs into scalable, end-to-end architectures—fro
 <p align="center">
   <img src="./stats/github-stats.svg" height="195" alt="GitHub stats" />
   <img src="./stats/top-langs.svg" height="195" alt="Top Languages" />
-</p>
-
-<p align="center">
-  ⭐ <b>289</b> Stars | 💻 <b>236</b> Commits (1yr) | 🔀 <b>17</b> PRs | 🧠 <b>YC</b> (Advisor Track) & <b>MIT</b> Alum
 </p>
 
 ---
