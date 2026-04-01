@@ -18,52 +18,109 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
       - name: Create stats directory
         run: mkdir -p stats
 
-      - name: Download GitHub Stats (with retry)
+      - name: Clone and setup github-readme-stats
         run: |
-          for i in {1..5}; do
-            echo "Attempt $i..."
-            curl -s -L \
-              "https://github-readme-stats.vercel.app/api?username=altaga&theme=default&layout=compact&show_icons=true&cache_seconds=3600" \
-              -o stats/github-stats.svg
-            
-            if grep -q "<svg" stats/github-stats.svg 2>/dev/null; then
-              echo "✅ GitHub stats downloaded successfully"
-              break
-            else
-              echo "⚠️ Attempt $i failed, retrying..."
-              sleep $((i * 5))
-            fi
-          done
+          git clone https://github.com/anuraghazra/github-readme-stats.git temp-stats
+          cd temp-stats
+          npm install --legacy-peer-deps
 
-      - name: Download Top Languages (with retry)
+      - name: Generate GitHub Stats Card
         run: |
-          for i in {1..5}; do
-            echo "Attempt $i..."
-            curl -s -L \
-              "https://github-readme-stats.vercel.app/api/top-langs/?username=altaga&theme=default&layout=compact&cache_seconds=3600" \
-              -o stats/top-languages.svg
+          cd temp-stats
+          cat > generate.js << 'EOF'
+          const http = require("http");
+          const url = require("url");
+          
+          // Start the server
+          const server = http.createServer(async (req, res) => {
+            const query = url.parse(req.url, true).query;
             
-            if grep -q "<svg" stats/top-languages.svg 2>/dev/null; then
-              echo "✅ Top languages downloaded successfully"
-              break
-            else
-              echo "⚠️ Attempt $i failed, retrying..."
-              sleep $((i * 5))
-            fi
-          done
+            try {
+              const renderStatsCard = require("./src/cards/stats-card.js").default;
+              const stats = await renderStatsCard({
+                username: "altaga",
+                title_color: "2f80ed",
+                text_color: "434d58",
+                bg_color: "fffefe",
+                hide_border: false,
+                cache_seconds: 14400,
+                locale: "en",
+                disable_animations: false,
+              });
+              
+              res.writeHead(200, { "Content-Type": "image/svg+xml" });
+              res.end(stats);
+            } catch (err) {
+              console.error(err);
+              res.writeHead(500);
+              res.end("Error");
+            }
+          });
+          
+          server.listen(3000);
+          EOF
+          
+          node generate.js &
+          sleep 2
+          curl -s "http://localhost:3000/?username=altaga" -o ../stats/github-stats.svg
 
-      - name: Verify files were created
+      - name: Generate Top Languages Card
         run: |
-          if [ -f stats/github-stats.svg ] && [ -f stats/top-languages.svg ]; then
-            echo "✅ Both SVG files created"
-            ls -lh stats/
-          else
-            echo "❌ Files not created"
-            exit 1
-          fi
+          cd temp-stats
+          cat > generate-langs.js << 'EOF'
+          const http = require("http");
+          const url = require("url");
+          
+          const server = http.createServer(async (req, res) => {
+            const query = url.parse(req.url, true).query;
+            
+            try {
+              const renderTopLanguages = require("./src/cards/top-languages-card.js").default;
+              const langs = await renderTopLanguages({
+                username: "altaga",
+                title_color: "2f80ed",
+                text_color: "434d58",
+                bg_color: "fffefe",
+                hide_border: false,
+                cache_seconds: 14400,
+                layout: "compact",
+              });
+              
+              res.writeHead(200, { "Content-Type": "image/svg+xml" });
+              res.end(langs);
+            } catch (err) {
+              console.error(err);
+              res.writeHead(500);
+              res.end("Error");
+            }
+          });
+          
+          server.listen(3001);
+          EOF
+          
+          node generate-langs.js &
+          sleep 2
+          curl -s "http://localhost:3001/?username=altaga" -o ../stats/top-languages.svg
+
+      - name: Cleanup
+        run: rm -rf temp-stats
+
+      - name: Verify files
+        run: |
+          echo "=== SVG Files Created ==="
+          ls -lh stats/
+          echo ""
+          echo "=== Checking SVG validity ==="
+          file stats/github-stats.svg
+          file stats/top-languages.svg
 
       - name: Configure git
         run: |
@@ -72,15 +129,10 @@ jobs:
 
       - name: Commit changes
         run: |
-          if [ -n "$(git status --porcelain)" ]; then
-            git add stats/
-            git commit -m "📊 Update GitHub stats"
-            echo "✅ Changes committed"
-          else
-            echo "ℹ️ No changes to commit"
-          fi
+          git add stats/
+          git diff --cached --quiet || git commit -m "📊 Update GitHub stats"
 
-      - name: Pull and push
+      - name: Push changes
         run: |
           git pull --no-edit origin master || true
-          git push origin master || echo "Nothing to push"
+          git push origin master
