@@ -2,7 +2,7 @@
 
 Architecting scalable solutions across IoT, Edge AI, Cloud, and Web3.
 
-# 🛠️ Core Tech Stack
+## 🛠️ Core Tech Stack
 
 <p align="center">
   <img src="https://img.shields.io/badge/C-A8B9CC?style=flat&logo=c&logoColor=white" alt="C" height="24" />
@@ -17,7 +17,7 @@ Architecting scalable solutions across IoT, Edge AI, Cloud, and Web3.
   <img src="https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux&logoColor=black" alt="Linux" height="24" />
 </p>
 
-# ⛓️ Web3 & Blockchains
+## ⛓️ Web3 & Blockchains
 
 <p align="center">
   <img src="https://img.shields.io/badge/Ethereum_EVMs-3C3C3D?style=flat&logo=ethereum&logoColor=white" alt="EVMs" height="24" />
@@ -30,14 +30,14 @@ Architecting scalable solutions across IoT, Edge AI, Cloud, and Web3.
   <img src="https://img.shields.io/badge/Monad-836EF9?style=flat&logoColor=white" alt="Monad" height="24" />
 </p>
 
-# 📊 Stats & Open Source
+## 📊 Stats & Open Source
 
 <p align="center">
   <img src="./stats/github-stats.svg" height="190" alt="GitHub stats" />
   <img src="./stats/top-langs.svg" height="190" alt="Top Languages" />
 </p>
 
-# 📫 Connect with me
+## 📫 Connect with me
 
 <p align="center">
   <a href="https://altaga-hacker.com/"><img src="https://img.shields.io/badge/Website-000000?style=flat&logo=globe&logoColor=white" alt="Website" height="24" /></a>
